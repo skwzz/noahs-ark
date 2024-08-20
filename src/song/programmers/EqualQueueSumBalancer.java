@@ -1,7 +1,5 @@
 package song.programmers;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.stream.IntStream;
 
 /**
@@ -26,7 +24,7 @@ public class EqualQueueSumBalancer {
     }
 
     public int solution(int[] queue1, int[] queue2) {
-        Queue<Integer> operationCountQueue = new PriorityQueue();
+        long minOperationCount = Long.MAX_VALUE;
         long totalSum = (long) IntStream.of(queue1).sum() + IntStream.of(queue2).sum();
         if (totalSum % 2 != 0) return -1;
         long targetNumber = totalSum / 2;
@@ -38,8 +36,10 @@ public class EqualQueueSumBalancer {
             while (true){
                 sum += extendedQueue[j];
                 if (sum == targetNumber){
-                    int operationCount = calculateOperationCount(i,j, queue1.length, queue2.length);
-                    operationCountQueue.add(operationCount);
+                    long operationCount = calculateOperationCount(i,j, queue1.length, queue2.length);
+                    if(minOperationCount > operationCount){
+                        minOperationCount = operationCount;
+                    }
                     break;
                 }
                 j++;
@@ -49,11 +49,15 @@ public class EqualQueueSumBalancer {
                 }
             }
         }
-        return operationCountQueue.isEmpty() ? -1 : operationCountQueue.peek();
+
+        if(minOperationCount == Long.MAX_VALUE){
+          minOperationCount = -1;
+        }
+        return (int) minOperationCount;
     }
 
     // j > i
-    private int calculateOperationCount(int i, int j, int queue1Length, int queue2Length) {
+    private long calculateOperationCount(int i, int j, int queue1Length, int queue2Length) {
         System.out.println("calculateOperationCount " + i + ", " + j);
         if(j < queue1Length -1){
             return (j + 1) + (queue2Length + i);
@@ -92,7 +96,7 @@ public class EqualQueueSumBalancer {
  * 테스트 8 〉	통과 (15.70ms, 82.9MB)
  * 테스트 9 〉	통과 (23.11ms, 68MB)
  * 테스트 10 〉	통과 (37.24ms, 86.6MB)
- * 테스트 11 〉	통과 (2768.84ms, 90.1MB)
+ * 테스트 11 〉	통과 (2768.84ms, 90.1MB) = -1
  * 테스트 12 〉	통과 (3680.34ms, 101MB)
  * 테스트 13 〉	통과 (7183.78ms, 96.6MB)
  * 테스트 14 〉	통과 (9400.20ms, 101MB)
@@ -109,7 +113,7 @@ public class EqualQueueSumBalancer {
  * 테스트 25 〉	실패 (1.09ms, 75MB)
  * 테스트 26 〉	실패 (1.09ms, 75.1MB)
  * 테스트 27 〉	실패 (1.06ms, 74.4MB)
- * 테스트 28 〉	통과 (9904.74ms, 92MB)
+ * 테스트 28 〉	통과 (9904.74ms, 92MB) = -1
  * 테스트 29 〉	통과 (198.98ms, 101MB)
  * 테스트 30 〉	실패 (3194.96ms, 106MB)
  * 채점 결과
