@@ -24,14 +24,13 @@ public class OvertimeIndex {
         Queue<Integer> workQueue = new PriorityQueue(Comparator.reverseOrder());
         Arrays.stream(works).forEach(workQueue::add);
 
-        while (n > 0) {
+        while (n-- > 0) {
             if (workQueue.isEmpty()) return 0L;
 
             Integer work = workQueue.poll();
             if (work == 1) continue;
 
             workQueue.add(work - 1);
-            n--;
         }
 
         return workQueue.stream()
@@ -41,24 +40,24 @@ public class OvertimeIndex {
 }
 /**
  * 정확성  테스트
- * 테스트 1 〉	통과 (4.43ms, 69.8MB)
- * 테스트 2 〉	통과 (3.52ms, 79.6MB)
- * 테스트 3 〉	통과 (2.74ms, 79.2MB)
- * 테스트 4 〉	통과 (3.51ms, 77.2MB)
- * 테스트 5 〉	통과 (4.22ms, 84.5MB)
- * 테스트 6 〉	통과 (3.27ms, 79.9MB)
- * 테스트 7 〉	통과 (3.22ms, 67.4MB)
- * 테스트 8 〉	통과 (5.14ms, 84.4MB)
- * 테스트 9 〉	통과 (5.71ms, 86.9MB)
- * 테스트 10 〉	통과 (3.06ms, 77MB)
- * 테스트 11 〉	통과 (3.13ms, 73.5MB)
- * 테스트 12 〉	실패 (1.19ms, 77.9MB)
- * 테스트 13 〉	통과 (1.08ms, 73.9MB)
+ * 테스트 1 〉	통과 (5.27ms, 77.3MB)
+ * 테스트 2 〉	통과 (2.82ms, 78.8MB)
+ * 테스트 3 〉	통과 (7.16ms, 78.1MB)
+ * 테스트 4 〉	통과 (6.17ms, 78.3MB)
+ * 테스트 5 〉	통과 (4.02ms, 82.8MB)
+ * 테스트 6 〉	통과 (3.03ms, 77.5MB)
+ * 테스트 7 〉	통과 (3.36ms, 76.7MB)
+ * 테스트 8 〉	통과 (5.96ms, 87.2MB)
+ * 테스트 9 〉	통과 (5.33ms, 72.9MB)
+ * 테스트 10 〉	통과 (3.39ms, 79.6MB)
+ * 테스트 11 〉	통과 (4.57ms, 78.4MB)
+ * 테스트 12 〉	통과 (5.07ms, 76.3MB)
+ * 테스트 13 〉	통과 (1.25ms, 74MB)
  * 효율성  테스트
- * 테스트 1 〉	통과 (131.45ms, 67.6MB)
- * 테스트 2 〉	통과 (118.74ms, 68.4MB)
+ * 테스트 1 〉	통과 (141.65ms, 67.8MB)
+ * 테스트 2 〉	통과 (219.37ms, 76.3MB)
  * 채점 결과
- * 정확성: 80.0
+ * 정확성: 86.7
  * 효율성: 13.3
- * 합계: 93.3 / 100.0
+ * 합계: 100.0 / 100.0
  */
