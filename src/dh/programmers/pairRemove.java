@@ -1,5 +1,7 @@
 package dh.programmers;
 
+import java.util.Stack;
+
 /**
  * https://school.programmers.co.kr/learn/courses/30/lessons/12973?language=java
  */
@@ -9,6 +11,27 @@ public class pairRemove {
         System.out.println("result = " + solution("cdcd"));
     }
 
+    // stack 사용
+    static int solution(String s)
+    {
+        int i = 0;
+        Stack<Character> stack = new Stack<>();
+
+        while (i < s.length()) {
+            char target = s.charAt(i);
+
+            if(!stack.empty() && stack.peek() == target) {
+                stack.pop();
+            } else {
+                stack.push(target);
+            }
+
+            i++;
+        }
+
+        return stack.empty() ? 1: 0;
+    }
+/*
     static int solution(String s)
     {
         int isLast = 0;
@@ -33,4 +56,5 @@ public class pairRemove {
 
         return s.isEmpty() ? 1: 0;
     }
+*/
 }
